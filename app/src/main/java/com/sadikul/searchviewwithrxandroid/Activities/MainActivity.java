@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView{
         ButterKnife.bind(this);
         apiInterface = RetrofiClient.getApiInterface();
 
+        searchview.setIconifiedByDefault(false);
         list=new ArrayList<>();
 
         adapter=new MainAdapter(getAppContext(),list);
@@ -72,61 +73,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityView{
                 });
     }
 
-    @OnClick(R.id.getData)
-    public void onViewClicked() {
-        /*Observable<Cars> carsObservable=apiInterface.getData();
-        carsObservable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Cars>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull Cars cars) {
-
-                        Log.e("cars",cars.getCars().toString());
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });*/
-        Observable<Notices> NoticesObservable = apiInterface.getData("ran");
-        NoticesObservable.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Notices>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull Notices notices) {
-
-                        for (NoticeItem item : notices.getNotice()) {
-                            Log.e("noticeItem", item.getTitle());
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 
     @Override
     public void showSearchData(Notices hashMap) {
@@ -149,14 +95,14 @@ public class MainActivity extends AppCompatActivity implements MainActivityView{
 
     @Override
     public void startLoading() {
-        Toast.makeText(getAppContext(),"Start hunting",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getAppContext(),"Start hunting",Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void stopLoading() {
 
-        Toast.makeText(getAppContext(),"Finished",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getAppContext(),"Finished",Toast.LENGTH_SHORT).show();
     }
 
     @Override
