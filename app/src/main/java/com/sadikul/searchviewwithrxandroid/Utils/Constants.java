@@ -6,6 +6,5 @@ package com.sadikul.searchviewwithrxandroid.Utils;
 
 public class Constants {
     public static  final String baseUrl="http://sadikulsathi.com/";
-    public static  final String getList="gaibandhaPTIDemo/get_search_result.php";
-    public static  final String getCartoonLinks="gaibandhaPTIDemo/get_notices.php";
+    public static  final String search_result_api = "get_search_result.php";
 }

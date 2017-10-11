@@ -4,7 +4,6 @@ import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.Notices;
 import com.sadikul.searchviewwithrxandroid.Utils.Constants;
 
 import io.reactivex.Observable;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -14,9 +13,7 @@ import retrofit2.http.Query;
 
 public interface ApiInterface{
 
-    @POST(Constants.getList)
+    @POST(Constants.search_result_api)
     Observable<Notices> getData(@Query("key") String key);
-    @GET(Constants.getCartoonLinks)
-    Observable<Notices> getNotices();
 
 }
