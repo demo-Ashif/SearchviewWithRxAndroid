@@ -1,5 +1,6 @@
 package com.sadikul.searchviewwithrxandroid.Retrofit;
 
+import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.MedicineSearchList;
 import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.Notices;
 import com.sadikul.searchviewwithrxandroid.Utils.Constants;
 
@@ -14,6 +15,8 @@ import retrofit2.http.Query;
 public interface ApiInterface{
 
     @POST(Constants.search_result_api)
-    Observable<Notices> getData(@Query("key") String key);
+    Observable<MedicineSearchList> getData(
+            @Query("name") String key
+    );
 
 }

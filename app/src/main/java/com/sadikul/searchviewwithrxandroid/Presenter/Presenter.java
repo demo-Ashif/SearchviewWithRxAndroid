@@ -1,6 +1,7 @@
 package com.sadikul.searchviewwithrxandroid.Presenter;
 
 import com.sadikul.searchviewwithrxandroid.Model.SearchApi;
+import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.MedicineSearchList;
 import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.Notices;
 import com.sadikul.searchviewwithrxandroid.interfaces.MainActivityView;
 import com.sadikul.searchviewwithrxandroid.interfaces.OnRequestComplete;
@@ -18,7 +19,7 @@ public class Presenter {
     public void getSearchResult(String query){
         new SearchApi(view.getAppContext(), query, new OnRequestComplete() {
             @Override
-            public void onRequestComplete(Notices o) {
+            public void onRequestComplete(MedicineSearchList o) {
                 view.stopLoading();
                 view.showSearchData(o);
             }

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,21 +13,38 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="name"
-            android:textColor="#212121"/>
+            android:text="medicine name"
+            android:textColor="#212121" />
 
         <TextView
-            android:id="@+id/age"
+            android:id="@+id/company_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
-            android:text="age"
-            android:textColor="#212121"/>
+            android:text="company_name"
+            android:textColor="#212121" />
+
+        <TextView
+            android:id="@+id/generic_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/company_name"
+            android:text="generic_name"
+            android:textColor="#212121" />
+
+        <TextView
+            android:id="@+id/sub_generic_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/generic_name"
+            android:text="sub_generic_name"
+            android:textColor="#212121" />
 
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#dadada"></View>
+        android:background="#dadada" />
 
 </LinearLayout>

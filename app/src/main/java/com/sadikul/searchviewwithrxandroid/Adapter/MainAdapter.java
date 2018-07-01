@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sadikul.searchviewwithrxandroid.R;
+import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.MedicineItem;
 import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.NoticeItem;
 
 import java.util.Collections;
@@ -21,9 +22,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
 
     private final LayoutInflater inflater;
     private Context context ;
-    List<NoticeItem> list = Collections.emptyList() ;
+    List<MedicineItem> list = Collections.emptyList() ;
 
-    public MainAdapter(Context context, List<NoticeItem> list){
+    public MainAdapter(Context context, List<MedicineItem> list){
         this.context = context ;
         this.list = list ;
         inflater = LayoutInflater.from(context) ;
@@ -37,7 +38,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
         return mainAdapterViewHolder;
     }
 
-    public void setData(List<NoticeItem> list){
+    public void setData(List<MedicineItem> list){
         this.list.clear();
         this.list=list;
         notifyDataSetChanged();
@@ -50,9 +51,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
 
     @Override
     public void onBindViewHolder(MainAdapterViewHolder holder, int position) {
-        NoticeItem NoticeItem = list.get(position) ;
-        holder.name.setText(NoticeItem.getTitle());
-        holder.age.setText(NoticeItem.getDescript());
+        MedicineItem medicineItem = list.get(position) ;
+        holder.name.setText(medicineItem.name);
+        holder.company_name.setText(medicineItem.companyName);
+        holder.generic_name.setText(medicineItem.genericName);
+        holder.sub_generic_name.setText(medicineItem.subGenericName);
     }
 
     public void clear() {
@@ -62,11 +65,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
 
     public class MainAdapterViewHolder extends RecyclerView.ViewHolder{
 
-        TextView name, age ;
+        TextView name, company_name, generic_name, sub_generic_name ;
         public MainAdapterViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
-            age = (TextView) itemView.findViewById(R.id.age) ;
+            company_name = (TextView) itemView.findViewById(R.id.company_name);
+            generic_name = (TextView) itemView.findViewById(R.id.generic_name);
+            sub_generic_name = (TextView) itemView.findViewById(R.id.sub_generic_name);
         }
     }
 }

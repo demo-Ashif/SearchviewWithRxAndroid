@@ -13,6 +13,8 @@ import com.sadikul.searchviewwithrxandroid.Adapter.MainAdapter;
 import com.sadikul.searchviewwithrxandroid.Presenter.Presenter;
 import com.sadikul.searchviewwithrxandroid.R;
 import com.sadikul.searchviewwithrxandroid.Retrofit.ApiInterface;
+import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.MedicineItem;
+import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.MedicineSearchList;
 import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.NoticeItem;
 import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.Notices;
 import com.sadikul.searchviewwithrxandroid.Retrofit.RetrofiClient;
@@ -31,7 +33,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements MainActivityView{
+public class MainActivity extends AppCompatActivity implements MainActivityView {
 
     ApiInterface apiInterface;
     @BindView(R.id.searchview)
@@ -39,9 +41,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityView{
     @BindView(R.id.myrecyler)
     RecyclerView myrecyler;
     Presenter presenter;
-    List<NoticeItem> list;
+    List<MedicineItem> list;
 
     MainAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +53,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityView{
         apiInterface = RetrofiClient.getApiInterface();
 
         searchview.setIconifiedByDefault(false);
-        list=new ArrayList<>();
+        list = new ArrayList<>();
 
-        adapter=new MainAdapter(getAppContext(),list);
+        adapter = new MainAdapter(this, list);
         myrecyler.setLayoutManager(new LinearLayoutManager(this));
         myrecyler.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        presenter=new Presenter(this);
+        presenter = new Presenter(this);
         searchview.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener() {
                     @Override
@@ -75,19 +78,19 @@ public class MainActivity extends AppCompatActivity implements MainActivityView{
 
 
     @Override
-    public void showSearchData(Notices hashMap) {
-        list=hashMap.getNotice();
-        if(list!=null){
+    public void showSearchData(MedicineSearchList hashMap) {
+        list = hashMap.medicineList;
+        if (list != null) {
             adapter.setData(list);
-        }else{
+        } else {
             adapter.clear();
         }
 
-        if(hashMap!=null){
+        if (hashMap != null) {
 
-            if(hashMap.getNotice()!=null){
-                for(NoticeItem noticeItem:hashMap.getNotice()){
-                    Log.e("notice",noticeItem.getTitle());
+            if (hashMap.medicineList != null) {
+                for (MedicineItem medicineItem : hashMap.medicineList) {
+                    Log.e("notice", medicineItem.name);
                 }
             }
         }
@@ -108,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView{
     @Override
     public void showMessage(String msg) {
 
-        Toast.makeText(getAppContext(),msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getAppContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

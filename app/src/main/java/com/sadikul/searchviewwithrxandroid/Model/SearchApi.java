@@ -1,8 +1,10 @@
 package com.sadikul.searchviewwithrxandroid.Model;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.sadikul.searchviewwithrxandroid.Retrofit.ApiInterface;
+import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.MedicineSearchList;
 import com.sadikul.searchviewwithrxandroid.Retrofit.POJO.Notices;
 import com.sadikul.searchviewwithrxandroid.Retrofit.RetrofiClient;
 import com.sadikul.searchviewwithrxandroid.interfaces.OnRequestComplete;
@@ -26,9 +28,10 @@ import retrofit2.Response;
 public class SearchApi {
     OnRequestComplete requestComplete;
     PublishSubject publishSubject;
+
     public SearchApi(final Context context, final String query, final OnRequestComplete onRequestComplete) {
         this.requestComplete = onRequestComplete;
-        ApiInterface apiInterface= RetrofiClient.getApiInterface();
+        ApiInterface apiInterface = RetrofiClient.getApiInterface();
         if (publishSubject == null) {
             publishSubject = PublishSubject.create();
             publishSubject
@@ -37,11 +40,12 @@ public class SearchApi {
                     .switchMap(searchValue -> apiInterface.getData(query)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread()))
-                    .subscribeWith(new DisposableObserver<Notices>() {
+                    .subscribeWith(new DisposableObserver<MedicineSearchList>() {
                         @Override
-                        public void onNext(Notices response) {
+                        public void onNext(MedicineSearchList response) {
                             //Update View here
                             requestComplete.onRequestComplete(response);
+                            Log.d("search", response.toString());
                         }
 
                         @Override
